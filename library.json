@@ -1,0 +1,22 @@
+{
+  "name": "BlueAES",
+  "keywords": "aes, ecb, crypto",
+  "description": "Simple AES 128bit ECP implementation ",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/mnezerka/blue-aes.git"
+  },
+  "authors": 
+  [
+    {
+      "name": "Michal Nezerka",
+      "email": "michal.nezerka@gmail.com",
+      "url": "http://blue.pavoucek.cz",
+      "maintainer": true
+    }
+  ],
+  "version": "1.0.0",
+  "frameworks": "arduino",
+  "platforms": "*"
+}
