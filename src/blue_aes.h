@@ -30,8 +30,6 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * --/COPYRIGHT--*/
 /*
- * TI_aes_128_encr_only.h
- *
  *  Created on: Nov 3, 2011
  *      Author: Eric Peeters
  *
@@ -42,10 +40,42 @@
 #ifndef BLUE_AES_H
 #define BLUE_AES_H
 
-unsigned int blue_aes_encrypt(unsigned char *plain, const unsigned int plain_size, const unsigned char *aes_key);
+/**
+ * Encryption of data buffer aligned to 128bit blocks
+ *
+ * @param plain data to be encrypted and result of encrytion (in/out parameter)
+ * @param plain_size number of bytes in plain buffer to be encrypted
+ * @param aes_key key to be used for encryption (must be 16 bytes)
+ */
+unsigned int blue_aes_encrypt(
+    unsigned char *plain,
+    const unsigned int plain_size,
+    const unsigned char *aes_key);
 
-unsigned int blue_aes_pkcs7_encrypt(unsigned char *plain, const unsigned int plain_size, const unsigned char *aes_key);
+/**
+ * Encryption of any data buffer, pkcs7 padding is applied before encryption
+ *
+ * @param plain data to be encrypted and result of encrytion (in/out parameter)
+ * @param plain_size number of bytes in plain buffer to be encrypted
+ * @param plain_size_max number of bytes available in plain buffer, some bytes
+ *        are always needed (at least 1 byte) for pkcs7 padding. Even data
+ *        aligned to 128bit blocks are padded
+ * @param aes_key key to be used for encryption (must be 16 bytes)
+ */
+unsigned int blue_aes_pkcs7_encrypt(
+    unsigned char *plain,
+    const unsigned int plain_size,
+    const unsigned int plain_size_max,
+    const unsigned char *aes_key);
 
-void blue_aes_encrypt_block(unsigned char *state, const unsigned char *aes_key);
+/**
+ * Encryption of single 128bit block 
+ *
+ * @param state data to be encrypted and result of encrytion (in/out parameter)
+ * @param aes_key key to be used for encryption (must be 16 bytes)
+ */
+void blue_aes_encrypt_block(
+    unsigned char *state,
+    const unsigned char *aes_key);
 
 #endif /* BLUE_AES_H */

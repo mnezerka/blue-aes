@@ -8,6 +8,8 @@
 
 #define BLOCK_SIZE 16 // AES 128bit / 8 bits = 16 bytes
 
+#define BUFFER_SIZE 1024 // size of buffer used both for plain and ecrypted content
+
 // helper method for printing array of bytes
 void printArray(String name, unsigned char*arr, int length)
 {
@@ -24,7 +26,7 @@ void printArray(String name, unsigned char*arr, int length)
 
 void testAES128()
 {
-    char data[1024];
+    char data[BUFFER_SIZE];
     strcpy(data, "{misamisamisamisami}");
 
     unsigned char key [] = {'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e'};
@@ -41,7 +43,11 @@ void testAES128()
     //printArray("Plain", (unsigned char*)data, pkcs7size);
     //Serial.println("PKCS7Size" + String(pkcs7size));
 
-    unsigned int pkcs7_size = blue_aes_pkcs7_encrypt((unsigned char*)data, (unsigned int)strlen(data), key);
+    unsigned int pkcs7_size = blue_aes_pkcs7_encrypt(
+            (unsigned char*)data,
+            (unsigned int)strlen(data),
+            BUFFER_SIZE,
+            key);
 
     printArray("Encrypted", (unsigned char*)data, pkcs7_size);
 

@@ -30,8 +30,6 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * --/COPYRIGHT--*/
 /*
- * TI_aes_128_encr_only.c
- *
  *  Created on: Nov 3, 2011
  *      Author: Eric Peeters
  *
@@ -157,7 +155,10 @@ void blue_aes_encrypt_block(unsigned char *state, const unsigned char *aes_key)
   }
 }
 
-unsigned int blue_aes_encrypt(unsigned char *plain, const unsigned int plain_size, const unsigned char *key)
+unsigned int blue_aes_encrypt(
+    unsigned char *plain,
+    const unsigned int plain_size,
+    const unsigned char *key)
 {
     for (int i = 0; i < plain_size; i += BLOCK_SIZE)
     {
@@ -165,9 +166,17 @@ unsigned int blue_aes_encrypt(unsigned char *plain, const unsigned int plain_siz
     }
 }
 
-unsigned int blue_aes_pkcs7_encrypt(unsigned char *plain, const unsigned int plain_size, const unsigned char *aes_key)
+unsigned int blue_aes_pkcs7_encrypt(
+    unsigned char *plain,
+    const unsigned int plain_size,
+    const unsigned int plain_size_max,
+    const unsigned char *aes_key)
 {
-    unsigned int pkcs7_size = blue_padding_pkcs7((unsigned char*)plain, plain_size, BLOCK_SIZE);
+    unsigned int pkcs7_size = blue_padding_pkcs7(
+            (unsigned char*)plain,
+            plain_size,
+            plain_size_max,
+            BLOCK_SIZE);
 
     blue_aes_encrypt(plain, pkcs7_size, aes_key);
 
